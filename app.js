@@ -7,18 +7,36 @@ let addTransaction = document.querySelector('.add-transaction-button');
 let itemNameInput = document.querySelector('.item-name-input');
 let itemAmountInput = document.querySelector('.item-amount-input');
 
+// Dummy Transictions
 let dummyTrans = [
-  { id: 1, text: 'Sallery', amount: 1000 },
-  { id: 2, text: 'Shirt', amount: -100 },
-  { id: 3, text: 'T-Shirt', amount: -100 },
-  { id: 4, text: 'Freelancing', amount: 500 },
+  {
+    id: 1,
+    text: 'Sallery',
+    amount: 1000,
+  },
+  {
+    id: 2,
+    text: 'Shirt',
+    amount: -100,
+  },
+  {
+    id: 3,
+    text: 'T-Shirt',
+    amount: -100,
+  },
+  {
+    id: 4,
+    text: 'Freelancing',
+    amount: 500,
+  },
 ];
+
+// All Transictions
 let transactions = dummyTrans;
 
 // Get Value From User
 function addTransactionFunc(e) {
   e.preventDefault();
-
   if (itemNameInput.value.trim() == '' || itemAmountInput.value.trim() == '') {
     alert('Please Fill Text and Amount Field');
   } else {
@@ -50,7 +68,6 @@ function removeTransaction(id) {
 // Add History List to DOM
 function addToDom(transaction) {
   let sign = transaction.amount < 0 ? '-' : '+';
-
   // Create History Item
   let historyItem = document.createElement('li');
   historyItem.classList.add(
@@ -84,14 +101,12 @@ function addToDom(transaction) {
 function updateBalance() {
   let amounts = transactions.map((transaction) => transaction.amount);
   let currentBalanceVal = amounts.reduce((acc, item) => acc + item, 0);
-
   let incomeBalance = amounts
     .filter((amount) => amount > 0)
     .reduce((acc, item) => acc + item, 0);
   let expenseBalance = amounts
     .filter((amount) => amount < 0)
     .reduce((acc, item) => acc + item, 0);
-
   //  Udating Balance in DOM
   if (Math.abs(incomeBalance) < Math.abs(expenseBalance)) {
     currentBalance.innerHTML = '-$' + Math.abs(currentBalanceVal).toFixed(2);
@@ -108,7 +123,6 @@ function init() {
   transactions.forEach(addToDom);
   updateBalance();
 }
-
 init();
 
 // Form Submit
