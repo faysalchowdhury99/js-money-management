@@ -65,7 +65,6 @@ function addToDom(transaction) {
     'rounded'
   );
   historyItem.classList.add(transaction.amount < 0 ? 'minus' : 'plus');
-  historyUl.appendChild(historyItem);
   historyItem.innerHTML = `
         <span class="item-name p-2 text-dark">${transaction.text}</span>
         <span class="item-amount ms-auto p-2 text-dark">${
@@ -78,6 +77,7 @@ function addToDom(transaction) {
           alt="trash"
           class="img-fluid text-white"
       /></span>`;
+  historyUl.appendChild(historyItem);
 }
 
 // Update Balance
@@ -104,6 +104,7 @@ function updateBalance() {
 
 // Initialize
 function init() {
+  historyUl.innerHTML = '';
   transactions.forEach(addToDom);
   updateBalance();
 }
